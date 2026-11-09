@@ -1,5 +1,7 @@
 package org.example.dun;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -10,29 +12,135 @@ public class Main {
         String location;
         int severity;
         Incident incident;
+        List<Incident> incidentList = new ArrayList<Incident>();
+
+        incidentList.add(new Incident(
+                "Possessed Toaster",
+                "Monterrey, Mexico",
+                3
+        ));
+
+        incidentList.add(new Incident(
+                "Sentient Coffee Machine",
+                "San Antonio, Texas",
+                4
+        ));
+
+        incidentList.add(new Incident(
+                "Haunted Printer",
+                "Chicago, Illinois",
+                2
+        ));
+
+        incidentList.add(new Incident(
+                "Microwave Communicating With Aliens",
+                "Roswell, New Mexico",
+                5
+        ));
+
+        incidentList.add(new Incident(
+                "Office Chair Moving By Itself",
+                "Austin, Texas",
+                1
+        ));
+
+        incidentList.add(new Incident(
+                "Refrigerator Demanding Human Sacrifices",
+                "Detroit, Michigan",
+                5
+        ));
+
+        incidentList.add(new Incident(
+                "Intern Trapped Inside Excel Spreadsheet",
+                "Seattle, Washington",
+                3
+        ));
+
+        incidentList.add(new Incident(
+                "Photocopier Printing Classified Documents",
+                "Washington, D.C.",
+                4
+        ));
 
         System.out.println("DEPARTMENT OF UNEXPLAINED NONSENSE INCIDENT REPORT");
-        System.out.print("INCIDENT TITLE: ");
-        incidentTitle = scanner.nextLine();
-        System.out.print("LOCATION: ");
-        location = scanner.nextLine();
-        System.out.print("SEVERITY(1 - 5): ");
-        severity = scanner.nextInt();
-        boolean flag = false;
-        do {
-            if (severity >= 1 && severity <= 5 ){
-                flag = true;
-            }
-            else{
-                System.out.println("INVALID RESPONSE, PLEASE TRY AGAIN");
-                System.out.print("SEVERITY(1 - 5): ");
-                severity = scanner.nextInt();
-            }
-        } while (!flag);
+        int aux = 0;
+        while(aux != 4){
+            System.out.println("MAIN MENU:");
+            System.out.println("1) ADD NEW INCIDENT");
+            System.out.println("2) DISPLAY ALL REGISTERED INCIDENTS");
+            System.out.println("3) VIEW INCIDENT");
+            System.out.println("4) EXIT");
+            System.out.print("CHOICE: ");
+            aux = scanner.nextInt();
+            scanner.nextLine();
+            switch(aux){
+                case 1:
+                    System.out.print("INCIDENT TITLE: ");
+                    incidentTitle = scanner.nextLine();
+                    System.out.print("LOCATION: ");
+                    location = scanner.nextLine();
+                    System.out.print("SEVERITY(1 - 5): ");
+                    severity = scanner.nextInt();
+                    boolean flag = false;
+                    do {
+                        if (severity >= 1 && severity <= 5 ){
+                            flag = true;
+                        }
+                        else{
+                            System.out.println("INVALID RESPONSE, PLEASE TRY AGAIN");
+                            System.out.print("SEVERITY(1 - 5): ");
+                            severity = scanner.nextInt();
+                        }
+                    } while (!flag);
 
-        incident = new Incident(incidentTitle, location, severity);
+                    incident = new Incident(incidentTitle, location, severity);
+                    incidentList.add(incident);
+                    System.out.println("-------------------------------------------");
+                    break;
+                case 2:
+                    if(!incidentList.isEmpty()) {
+                        System.out.println("TOTAL INCIDENTS: " + incidentList.size());
+                        for (Incident value : incidentList) {
+                            value.displayIncident();
+                        }
+                    }
+                    else{
+                        System.out.println("NO ACTIVE INCIDENTS FOUND.");
+                    }
+                    break;
+                case 3:
+                    if (!incidentList.isEmpty()) {
+                        System.out.println("SELECT WHICH INCIDENT TO VIEW");
+                        int i = 0;
+                        for(Incident value: incidentList) {
+                            System.out.println(i + ") " + value.getIncidentTitle());
+                            i++;
+                        }
+                        int choice = 0;
+                        choice = scanner.nextInt();
+                        if(choice < incidentList.size() && choice >= 0){
+                            Incident incidentAux = incidentList.get(choice);
+                            incidentAux.displayIncident();
+                        }
+                        else{
+                            System.out.println("INVALID CHOICE");
+                        }
 
-        System.out.println("-------------------------------------------");
-        incident.displayIncident();
+                    }
+                    else{
+                        System.out.println("THERE ARE NO INCIDENTS REPORTED");
+                    }
+                    break;
+                case 4:
+                    aux = 4;
+                    break;
+                default:
+                    System.out.println("PLEASE SELECT A VALID OPTION");
+                    break;
+
+
+            }
+        }
+
     }
 }

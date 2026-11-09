@@ -19,7 +19,21 @@ public class Incident {
         System.out.println("LOCATION: " + location);
         System.out.println("SEVERITY: " + severity);
         System.out.println("STATUS: " + status);
+    }
 
+    public String getIncidentTitle(){
+        return this.incidentTitle;
+    }
+
+    public int getSeverity(){
+        return this.severity;
+    }
+
+    public void setSeverity(int severity){
+        if(severity > 0 && severity < 6)
+            this.severity = severity;
+        else
+            System.out.println("INVALID SEVERITY LEVEL");
     }
 
 }
