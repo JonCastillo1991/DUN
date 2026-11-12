@@ -64,13 +64,15 @@ public class Main {
 
         System.out.println("DEPARTMENT OF UNEXPLAINED NONSENSE INCIDENT REPORT");
         int aux = 0;
-        while(aux != 5){
+        while(aux != 7){
             System.out.println("MAIN MENU:");
             System.out.println("1) ADD NEW INCIDENT");
             System.out.println("2) DISPLAY ALL REGISTERED INCIDENTS");
             System.out.println("3) VIEW INCIDENT");
             System.out.println("4) EDIT INCIDENT SEVERITY");
-            System.out.println("5) EXIT");
+            System.out.println("5) EDIT INCIDENT LOCATION");
+            System.out.println("6) EDIT INCIDENT TITLE");
+            System.out.println("7) EXIT");
             System.out.print("CHOICE: ");
             aux = scanner.nextInt();
             scanner.nextLine();
@@ -137,16 +139,17 @@ public class Main {
                         System.out.println("SELECT WHICH INCIDENT TO EDIT SEVERITY");
                         int i = 0;
                         for (Incident value : incidentList) {
-                            System.out.println(i + ") " + value.getIncidentTitle());
+                            System.out.println(i + ") " + value.getIncidentTitle() + " SEVERITY: " + value.getSeverity());
                             i++;
                         }
                         int choice = 0;
                         choice = scanner.nextInt();
                         if (choice < incidentList.size() && choice >= 0) {
-                            incidentList.get(choice).displayIncident();
+                            Incident incidentToModify = incidentList.get(choice);
+                            incidentToModify.displayIncident();
                             System.out.println("PLEASE ENTER NEW LEVEL OF SEVERITY: ");
-                            int aux2;
-                            incidentList.get(choice).setSeverity(scanner.nextInt());
+                            incidentToModify.setSeverity(scanner.nextInt());
+                            System.out.println("CURRENT SEVERITY: " + incidentToModify.getSeverity());
                         }
                        else
                            System.out.println("INVALID RESPONSE");
@@ -155,7 +158,56 @@ public class Main {
                         System.out.println("THERE ARE NO REGISTERED INCIDENTS");
                     break;
                 case 5:
-                    aux = 5;
+                    if (!incidentList.isEmpty()) {
+                        System.out.println("SELECT WHICH INCIDENT TO EDIT LOCATION");
+                        int i = 0;
+                        for (Incident value : incidentList) {
+                            System.out.println(i + ") " + value.getIncidentTitle() + " LOCATION:" + value.getLocation());
+                            i++;
+                        }
+                        int choice = 0;
+                        choice = scanner.nextInt();
+                        scanner.nextLine();
+                        if (choice < incidentList.size() && choice >= 0) {
+                            Incident incidentToModify = incidentList.get(choice);
+                            incidentToModify.displayIncident();
+                            System.out.println("PLEASE ENTER NEW LOCATION: ");
+                            incidentToModify.setLocation(scanner.nextLine());
+                            System.out.println("CURRENT LOCATION: " + incidentToModify.getLocation());
+                        }
+                        else
+                            System.out.println("INVALID RESPONSE");
+                    }
+                    else
+                        System.out.println("THERE ARE NO REGISTERED INCIDENTS");
+                    break;
+                case 6:
+                    if (!incidentList.isEmpty()) {
+                        System.out.println("SELECT WHICH INCIDENT TO EDIT TITLE");
+                        int i = 0;
+                        for (Incident value : incidentList) {
+                            System.out.println(i + ") " + value.getIncidentTitle());
+                            i++;
+                        }
+                        int choice = 0;
+                        choice = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println();
+                        if (choice < incidentList.size() && choice >= 0) {
+                            Incident incidentToModify = incidentList.get(choice);
+                            incidentToModify.displayIncident();
+                            System.out.println("PLEASE ENTER NEW TITLE: ");
+                            incidentToModify.setIncidentTitle(scanner.nextLine());
+                            System.out.println("CURRENT TITLE: " + incidentToModify.getIncidentTitle());
+                        }
+                        else
+                            System.out.println("INVALID RESPONSE");
+                    }
+                    else
+                        System.out.println("THERE ARE NO REGISTERED INCIDENTS");
+                    break;
+                case 7:
+                    aux = 7;
                     break;
                 default:
                     System.out.println("PLEASE SELECT A VALID OPTION");

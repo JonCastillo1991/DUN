@@ -25,6 +25,24 @@ public class Incident {
         return this.incidentTitle;
     }
 
+    public String getLocation(){return this.location;}
+
+    public void setIncidentTitle(String incidentTitle) {
+        if(incidentTitle != null && !incidentTitle.isBlank()) {
+            this.incidentTitle = incidentTitle;
+        }
+        else
+            System.out.println("INVALID TITLE");
+    }
+
+    public void setLocation(String location){
+        if(location != null && !location.isBlank()) {
+            this.location = location;
+        }
+        else
+            System.out.println("INVALID LOCATION");
+    }
+
     public int getSeverity(){
         return this.severity;
     }
