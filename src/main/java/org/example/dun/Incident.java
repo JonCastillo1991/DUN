@@ -61,7 +61,7 @@ public class Incident {
 
     public void setStatus(IncidentStatus status) {
         if(status != null) {
-            switch(status){
+            switch(this.status){
                 case OPEN:
                     break;
                 case UNDER_INVESTIGATION:
