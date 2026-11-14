@@ -4,13 +4,14 @@ public class Incident {
     private String incidentTitle;
     private String location;
     private int severity;
-    private String status;
+    private IncidentStatus status;
+
 
     public Incident(String incidentTitle, String location, int severity){
         this.incidentTitle = incidentTitle;
         this.location = location;
         this.severity = severity;
-        this.status = "OPEN";
+        this.status = IncidentStatus.OPEN;
     }
 
     public void displayIncident(){
@@ -54,4 +55,11 @@ public class Incident {
             System.out.println("INVALID SEVERITY LEVEL");
     }
 
+    public IncidentStatus getStatus(){
+        return this.status;
+    }
+
+    public void setStatus(IncidentStatus status) {
+        this.status = status;
+    }
 }

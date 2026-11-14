@@ -64,7 +64,7 @@ public class Main {
 
         System.out.println("DEPARTMENT OF UNEXPLAINED NONSENSE INCIDENT REPORT");
         int aux = 0;
-        while(aux != 7){
+        while(aux != 8){
             System.out.println("MAIN MENU:");
             System.out.println("1) ADD NEW INCIDENT");
             System.out.println("2) DISPLAY ALL REGISTERED INCIDENTS");
@@ -72,7 +72,8 @@ public class Main {
             System.out.println("4) EDIT INCIDENT SEVERITY");
             System.out.println("5) EDIT INCIDENT LOCATION");
             System.out.println("6) EDIT INCIDENT TITLE");
-            System.out.println("7) EXIT");
+            System.out.println("7) EDIT INCIDENT STATUS");
+            System.out.println("8) EXIT");
             System.out.print("CHOICE: ");
             aux = scanner.nextInt();
             scanner.nextLine();
@@ -207,7 +208,53 @@ public class Main {
                         System.out.println("THERE ARE NO REGISTERED INCIDENTS");
                     break;
                 case 7:
-                    aux = 7;
+                    int choice;
+                    IncidentStatus nextStatus = IncidentStatus.OPEN;
+                    if (!incidentList.isEmpty()) {
+                        System.out.println("SELECT WHICH INCIDENT TO EDIT STATUS");
+                        int i = 0;
+                        for (Incident value : incidentList) {
+                            System.out.println(i + ") " + value.getIncidentTitle() + " STATUS:"  + value.getStatus());
+                            i++;
+                        }
+                        int choice2 = 0;
+                        choice2 = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println();
+                        switch(incidentList.get(choice2).getStatus()){
+                            case OPEN:
+                                nextStatus = IncidentStatus.UNDER_INVESTIGATION;
+                                break;
+                            case UNDER_INVESTIGATION:
+                                nextStatus = IncidentStatus.CONTAINED;
+                                break;
+                            case CONTAINED:
+                                nextStatus = IncidentStatus.CLOSED;
+                                break;
+                            case CLOSED:
+                                nextStatus = IncidentStatus.OPEN;
+                                break;
+                            default:
+                                System.out.println("ERROR SEND CODE MONKEYS");
+                                break;
+                        }
+                        System.out.println("ARE YOU SURE YOU WANT TO PROGRESS INCIDENT " + incidentList.get(choice2).getIncidentTitle() + " STATUS FROM " + incidentList.get(choice2).getStatus() + " TO STATUS " + nextStatus);
+                        System.out.println("1) YES 2) NO");
+                        choice = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println();
+                        if (choice == 1){
+                            incidentList.get(choice2).setStatus(nextStatus);
+                            System.out.println("STATUS FOR " + incidentList.get(choice2).getIncidentTitle() + "HAS BEEN UPDATED TO " + incidentList.get(choice2).getStatus());
+                        } else if (choice == 2) {
+                            System.out.println("STATUS FOR " + incidentList.get(choice2).getIncidentTitle() + " HAS NOT BEEN UPDATED. IT REMAINS AT " + incidentList.get(choice2).getStatus());
+                        }
+                        else
+                            System.out.println("INVALID OPTION");
+                    }
+                    break;
+                case 8:
+                    aux = 8;
                     break;
                 default:
                     System.out.println("PLEASE SELECT A VALID OPTION");
