@@ -60,6 +60,19 @@ public class Incident {
     }
 
     public void setStatus(IncidentStatus status) {
-        this.status = status;
+        if(status != null) {
+            switch(status){
+                case OPEN:
+                    break;
+                case UNDER_INVESTIGATION:
+                    break;
+                case CONTAINED:
+                    break;
+                case CLOSED:
+                    break;
+            }
+        }
+        else
+            System.out.println("ERROR, STATUS CAN NOT BE NULL");
     }
 }

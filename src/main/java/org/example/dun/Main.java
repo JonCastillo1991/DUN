@@ -219,6 +219,7 @@ public class Main {
                         }
                         int choice2 = 0;
                         choice2 = scanner.nextInt();
+                        if(choice2 >= 0 && choice2 < incidentList.size()){
                         scanner.nextLine();
                         System.out.println();
                         switch(incidentList.get(choice2).getStatus()){
@@ -232,7 +233,7 @@ public class Main {
                                 nextStatus = IncidentStatus.CLOSED;
                                 break;
                             case CLOSED:
-                                nextStatus = IncidentStatus.OPEN;
+                                nextStatus = IncidentStatus.UNDER_INVESTIGATION;
                                 break;
                             default:
                                 System.out.println("ERROR SEND CODE MONKEYS");
@@ -250,7 +251,10 @@ public class Main {
                             System.out.println("STATUS FOR " + incidentList.get(choice2).getIncidentTitle() + " HAS NOT BEEN UPDATED. IT REMAINS AT " + incidentList.get(choice2).getStatus());
                         }
                         else
-                            System.out.println("INVALID OPTION");
+                            System.out.println("INVALID OPTION, STATUS REMAINS");
+                        }
+                        else
+                            System.out.println("ERROR");
                     }
                     break;
                 case 8:
