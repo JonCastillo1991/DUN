@@ -63,12 +63,28 @@ public class Incident {
         if(status != null) {
             switch(this.status){
                 case OPEN:
+                    if(status == IncidentStatus.UNDER_INVESTIGATION)
+                        this.status = status;
+                    else
+                        System.out.println("INVALID STATUS TRANSITION");
                     break;
                 case UNDER_INVESTIGATION:
+                    if(status == IncidentStatus.CONTAINED)
+                        this.status = status;
+                    else
+                        System.out.println("INVALID STATUS TRANSITION");
                     break;
                 case CONTAINED:
+                    if(status == IncidentStatus.CLOSED)
+                        this.status = status;
+                    else
+                        System.out.println("INVALID STATUS TRANSITION");
                     break;
                 case CLOSED:
+                    if(status == IncidentStatus.OPEN)
+                        this.status = status;
+                    else
+                        System.out.println("INVALID STATUS TRANSITION");
                     break;
             }
         }
