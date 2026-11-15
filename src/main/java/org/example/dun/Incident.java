@@ -81,7 +81,7 @@ public class Incident {
                         System.out.println("INVALID STATUS TRANSITION");
                     break;
                 case CLOSED:
-                    if(status == IncidentStatus.OPEN)
+                    if(status == IncidentStatus.UNDER_INVESTIGATION)
                         this.status = status;
                     else
                         System.out.println("INVALID STATUS TRANSITION");
