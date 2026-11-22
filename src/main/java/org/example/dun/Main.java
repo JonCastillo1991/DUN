@@ -114,6 +114,7 @@ public class Main {
                     break;
                 case 3:
                     if (!incidentList.isEmpty()) {
+                        System.out.println("SELECT WHICH INCIDENT TO VIEW");
                         displayIncidentOptions(incidentList);
                         int choice = 0;
                         choice = scanner.nextInt();
@@ -179,6 +180,7 @@ public class Main {
                     break;
                 case 6:
                     if (!incidentList.isEmpty()) {
+                        System.out.println("SELECT WHICH INCIDENT TO EDIT");
                         displayIncidentOptions(incidentList);
                         int choice = 0;
                         choice = scanner.nextInt();
@@ -261,7 +263,6 @@ public class Main {
     }
 
     public static void displayIncidentOptions(List<Incident> incidentList) {
-            System.out.println("SELECT WHICH INCIDENT TO VIEW");
             int i = 0;
             for (Incident value : incidentList) {
                 System.out.println(i + ") " + value.getIncidentTitle());
